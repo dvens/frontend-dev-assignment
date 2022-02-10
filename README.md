@@ -111,8 +111,8 @@ When you complete the assignment either push your local working copy to a remote
 -   Create shared component Input
 -   Create hook for useClickoutside
 -   Create shared highlight component
-    x Add typescript
--   Add storybook
+x Add typescript
+x  Add storybook
 -   Use reducer instead of usestate.
 -   Add use keyboard focus hook for only focus state on the keyboard.
 -   Add skiplink for content

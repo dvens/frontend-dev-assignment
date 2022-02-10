@@ -1,4 +1,4 @@
-// this response is the default: 
+// this response is the default:
 //! params: {"search": "default"}
 {
     "search" : "default",
