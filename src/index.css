@@ -80,9 +80,9 @@ h6 {
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
+    margin: 2rem auto 0 auto;
+    max-width: 30rem;
+    padding: 0 1.5rem;
 }
 
 .skip-link {

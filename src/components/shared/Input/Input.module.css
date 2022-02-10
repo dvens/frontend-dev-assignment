@@ -1,0 +1,13 @@
+.Input {
+    border: 0.1rem solid var(--color-light-grey);
+    color: var(--color-black);
+    font-size: 1.4rem;
+    line-height: 1;
+    outline: none;
+    padding: 1rem 3rem 1rem 1rem;
+    width: 100%;
+}
+
+.Input::placeholder {
+    color: var(--color-dark-grey);
+}
