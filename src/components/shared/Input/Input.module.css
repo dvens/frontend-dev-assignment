@@ -5,9 +5,14 @@
     line-height: 1;
     outline: none;
     padding: 1rem 3rem 1rem 1rem;
+    transition: border-color 300ms;
     width: 100%;
 }
 
 .Input::placeholder {
     color: var(--color-dark-grey);
+}
+
+.Input:focus {
+    border-color: var(--color-light-dark);
 }

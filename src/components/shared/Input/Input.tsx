@@ -13,6 +13,7 @@ export interface InputProps {
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    autoComplete?: string;
     ariaAutocomplete?: 'none' | 'inline' | 'list' | 'both';
     ariaControls?: string;
     ariaLabelledby?: string;
@@ -31,6 +32,7 @@ export const Input: FunctionComponent<InputProps> = ({
     ariaAutocomplete,
     ariaControls,
     ariaLabelledby,
+    autoComplete,
 }) => (
     <>
         {srOnly ? (
@@ -55,6 +57,7 @@ export const Input: FunctionComponent<InputProps> = ({
             aria-autocomplete={ariaAutocomplete}
             aria-controls={ariaControls}
             aria-labelledby={ariaLabelledby}
+            autoComplete={autoComplete}
         />
     </>
 );

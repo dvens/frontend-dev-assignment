@@ -11,9 +11,10 @@ export const InputDefault = () => (
         onFocus={(e) => console.log('Focus: ', e)}
         onChange={(e) => console.log('Change: ', e)}
         onBlur={(e) => console.log('Blur: ', e)}
-        ariaAutocomplete={'list'}
-        ariaControls={'search-list-box'}
-        ariaLabelledby={'search-input-label'}
+        ariaAutocomplete="list"
+        ariaControls="search-list-box"
+        ariaLabelledby="search-input-label"
         srOnly={true}
+        autoComplete="off"
     />
 );
