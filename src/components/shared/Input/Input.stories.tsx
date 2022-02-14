@@ -5,7 +5,7 @@ export default { title: 'Components/Shared' };
 export const InputDefault = () => (
     <Input
         label="Search for products and pick an option"
-        placeholder={'Zoeken'}
+        placeholder="Zoeken"
         id="search-input"
         labelId="search-input-label"
         onFocus={(e) => console.log('Focus: ', e)}
@@ -14,5 +14,6 @@ export const InputDefault = () => (
         ariaAutocomplete={'list'}
         ariaControls={'search-list-box'}
         ariaLabelledby={'search-input-label'}
+        srOnly={true}
     />
 );

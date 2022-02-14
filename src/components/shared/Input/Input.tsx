@@ -3,23 +3,25 @@ import { VisuallyHidden } from '../VisuallyHidden';
 
 import styles from './Input.module.css';
 
-interface InputProps {
+export interface InputProps {
     label: string;
     type?: string;
     id: string;
     labelId: string;
     placeholder: string;
-    onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
-    ariaAutocomplete: 'none' | 'inline' | 'list' | 'both';
-    ariaControls: string;
-    ariaLabelledby: string;
+    srOnly?: boolean;
+    onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    ariaAutocomplete?: 'none' | 'inline' | 'list' | 'both';
+    ariaControls?: string;
+    ariaLabelledby?: string;
 }
 
 export const Input: FunctionComponent<InputProps> = ({
     label,
     type = 'input',
+    srOnly = false,
     id,
     labelId,
     placeholder,
@@ -31,11 +33,17 @@ export const Input: FunctionComponent<InputProps> = ({
     ariaLabelledby,
 }) => (
     <>
-        <VisuallyHidden>
+        {srOnly ? (
+            <VisuallyHidden>
+                <label htmlFor={id} id={labelId}>
+                    {label}
+                </label>
+            </VisuallyHidden>
+        ) : (
             <label htmlFor={id} id={labelId}>
                 {label}
             </label>
-        </VisuallyHidden>
+        )}
         <input
             className={styles.Input}
             id={id}
