@@ -14,7 +14,7 @@ export interface InputProps {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
     autoComplete?: string;
-    ariaAutocomplete?: 'none' | 'inline' | 'list' | 'both';
+    ariaAutocomplete?: React.AriaAttributes['aria-autocomplete'];
     ariaControls?: string;
     ariaLabelledby?: string;
 }

@@ -23,6 +23,10 @@ export const Search = () => {
         setShowReset(hasValue);
     }
 
+    function resetOnClickHandler() {
+        setShowReset(false);
+    }
+
     return (
         <div className={styles.Search}>
             <form role="search" onSubmit={handleSubmit}>
@@ -45,16 +49,20 @@ export const Search = () => {
                         srOnly={true}
                         autoComplete="off"
                     />
-                </div>
-                <div className={styles.SearchButtonHolder}>
-                    <Button type="reset" isHidden={!showReset}>
-                        <VisuallyHidden>Reset search results</VisuallyHidden>
-                        <CloseIcon width={12} height={12} />
-                    </Button>
-                    <Button type="submit">
-                        <VisuallyHidden>Submit search results</VisuallyHidden>
-                        <SearchIcon />
-                    </Button>
+                    <div className={styles.SearchButtonHolder}>
+                        <Button
+                            type="reset"
+                            testId="reset"
+                            isHidden={!showReset}
+                            onClick={resetOnClickHandler}>
+                            <VisuallyHidden>Reset search results</VisuallyHidden>
+                            <CloseIcon width={12} height={12} />
+                        </Button>
+                        <Button type="submit" testId="submit">
+                            <VisuallyHidden>Submit search results</VisuallyHidden>
+                            <SearchIcon />
+                        </Button>
+                    </div>
                 </div>
                 <ul role="listbox" aria-labelledby={SEARCH_LABEL} id={SEARCH_LISTBOX}></ul>
             </form>

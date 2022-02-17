@@ -1,5 +1,5 @@
-import { Search } from './Search';
+import { Search as SearchComponent } from './Search';
 
 export default { title: 'Components/Features' };
 
-export const SearchDefault = () => <Search />;
+export const Search = () => <SearchComponent />;

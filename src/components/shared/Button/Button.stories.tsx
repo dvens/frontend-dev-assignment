@@ -1,16 +1,16 @@
-import { Button } from '.';
+import { Button as ButtonComponent } from '.';
 import { CloseIcon, SearchIcon } from '../Icons';
 
 export default { title: 'Components/Shared' };
 
-export const ButtonDefault = () => <Button>Default button</Button>;
-export const ButtonIcon = () => (
+export const Button = () => <ButtonComponent>Default button</ButtonComponent>;
+export const IconButton = () => (
     <>
-        <Button>
+        <ButtonComponent>
             <SearchIcon />
-        </Button>
-        <Button>
+        </ButtonComponent>
+        <ButtonComponent>
             <CloseIcon width={13} height={13} />
-        </Button>
+        </ButtonComponent>
     </>
 );

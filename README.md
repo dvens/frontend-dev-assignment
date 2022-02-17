@@ -106,13 +106,13 @@ When you complete the assignment either push your local working copy to a remote
 
 -   Use a hook as useEvent or useKey to register key movement
 -   Create hook useCombobox
--   Create feature called search
+x   Create feature called search
 -   Create shared components Combobox, ComboList, ComboListItem
--   Create shared component Input
--   Create hook for useClickoutside
+x   Create shared component Input
+x   Create hook for useClickoutside
 -   Create shared highlight component
 x Add typescript
 x  Add storybook
 -   Use reducer instead of usestate.
 -   Add use keyboard focus hook for only focus state on the keyboard.
--   Add skiplink for content
+x   Add skiplink for content

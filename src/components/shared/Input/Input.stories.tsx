@@ -1,9 +1,9 @@
-import { Input } from './Input';
+import { Input as InputComponent } from './Input';
 
 export default { title: 'Components/Shared' };
 
-export const InputDefault = () => (
-    <Input
+export const Input = () => (
+    <InputComponent
         label="Search for products and pick an option"
         placeholder="Zoeken"
         id="search-input"
