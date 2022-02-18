@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import { debounce } from '../../../utils/debounce';
 import { Button } from '../../shared/Button';
 import { CloseIcon, SearchIcon } from '../../shared/Icons';
 import { Input } from '../../shared/Input';
@@ -16,12 +17,12 @@ export const Search = () => {
         console.log('Form submitted');
     }
 
-    function inputOnchangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-        const { value } = e.currentTarget;
+    const inputOnchangeHandler = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
         const hasValue = !!value.trim().length;
 
         setShowReset(hasValue);
-    }
+    }, 250);
 
     function resetOnClickHandler() {
         setShowReset(false);

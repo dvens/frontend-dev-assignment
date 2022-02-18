@@ -1,0 +1,35 @@
+.ComboboxList {
+    border-left: 0.1rem solid var(--color-light-grey);
+    border-right: 0.1rem solid var(--color-light-grey);
+    list-style: none;
+    max-height: 20rem;
+    opacity: 0;
+    overflow-y: auto;
+    padding: 0;
+    transition-property: visibility, opacity, transform;
+    transition-duration: 300ms;
+    transform: translateY(2rem);
+    visibility: hidden;
+}
+
+.ComboboxListisActive {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.ComboboxListItem {
+    color: var(--color-dark-grey);
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.ComboboxList,
+.ComboboxListItem:not(:last-child) {
+    border-bottom: 0.1rem solid var(--color-light-grey);
+}
+
+.ComboboxListItem[aria-selected="true"],
+.ComboboxListItem:hover {
+    background-color: var(--color-light-grey);
+}
