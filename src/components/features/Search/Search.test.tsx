@@ -1,18 +1,20 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 
 import { Search } from './Search';
 import buttonStyles from '../../shared/Button/Button.module.css';
 
 describe('<Search />', () => {
-    test('It should show reset button when the input has a value', () => {
+    test('It should show reset button when the input has a value', async () => {
         const { container } = render(<Search />);
 
         const input = screen.getByPlaceholderText('Zoeken');
 
         fireEvent.change(input, { target: { value: 'Test value' } });
 
-        expect(container.querySelector(`[type="reset"]`)).not.toHaveClass(
-            buttonStyles.ButtonIsHidden,
+        await waitFor(() =>
+            expect(container.querySelector(`[type="reset"]`)).not.toHaveClass(
+                buttonStyles.ButtonIsHidden,
+            ),
         );
     });
 

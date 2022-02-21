@@ -14,7 +14,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "api": "canned -p 5000 ./api/"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {

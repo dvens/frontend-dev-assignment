@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { forwardRef } from 'react';
 import { VisuallyHidden } from '../VisuallyHidden';
 
 import styles from './Input.module.css';
@@ -17,47 +17,54 @@ export interface InputProps {
     ariaAutocomplete?: React.AriaAttributes['aria-autocomplete'];
     ariaControls?: string;
     ariaLabelledby?: string;
+    ref?: React.MutableRefObject<any>;
 }
 
-export const Input: FunctionComponent<InputProps> = ({
-    label,
-    type = 'input',
-    srOnly = false,
-    id,
-    labelId,
-    placeholder,
-    onBlur,
-    onChange,
-    onFocus,
-    ariaAutocomplete,
-    ariaControls,
-    ariaLabelledby,
-    autoComplete,
-}) => (
-    <>
-        {srOnly ? (
-            <VisuallyHidden>
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+    (
+        {
+            label,
+            type = 'input',
+            srOnly = false,
+            id,
+            labelId,
+            placeholder,
+            onBlur,
+            onChange,
+            onFocus,
+            ariaAutocomplete,
+            ariaControls,
+            ariaLabelledby,
+            autoComplete,
+        },
+        ref,
+    ) => (
+        <>
+            {srOnly ? (
+                <VisuallyHidden>
+                    <label htmlFor={id} id={labelId}>
+                        {label}
+                    </label>
+                </VisuallyHidden>
+            ) : (
                 <label htmlFor={id} id={labelId}>
                     {label}
                 </label>
-            </VisuallyHidden>
-        ) : (
-            <label htmlFor={id} id={labelId}>
-                {label}
-            </label>
-        )}
-        <input
-            className={styles.Input}
-            id={id}
-            type={type}
-            placeholder={placeholder}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            onChange={onChange}
-            aria-autocomplete={ariaAutocomplete}
-            aria-controls={ariaControls}
-            aria-labelledby={ariaLabelledby}
-            autoComplete={autoComplete}
-        />
-    </>
+            )}
+            <input
+                className={styles.Input}
+                id={id}
+                type={type}
+                placeholder={placeholder}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                onChange={onChange}
+                aria-autocomplete={ariaAutocomplete}
+                aria-controls={ariaControls}
+                aria-labelledby={ariaLabelledby}
+                autoComplete={autoComplete}
+                ref={ref}
+            />
+        </>
+    ),
 );

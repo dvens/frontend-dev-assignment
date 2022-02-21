@@ -1,5 +1,6 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { debounce } from '../../../utils/debounce';
+import { KEY_CODES, useKeycodes } from '../../../utils/hooks';
 import { Button } from '../../shared/Button';
 import { CloseIcon, SearchIcon } from '../../shared/Icons';
 import { Input } from '../../shared/Input';
@@ -11,6 +12,14 @@ const SEARCH_LISTBOX = 'search-listbox';
 
 export const Search = () => {
     const [showReset, setShowReset] = useState(false);
+
+    const inputRef = useRef(null);
+
+    useKeycodes(inputRef, {
+        [KEY_CODES.Escape]: () => console.log('Escape'),
+        [KEY_CODES.ArrowDown]: () => console.log('ArrowDown'),
+        [KEY_CODES.ArrowUp]: () => console.log('ArrowUp'),
+    });
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
@@ -49,6 +58,7 @@ export const Search = () => {
                         ariaLabelledby={SEARCH_LABEL}
                         srOnly={true}
                         autoComplete="off"
+                        ref={inputRef}
                     />
                     <div className={styles.SearchButtonHolder}>
                         <Button
