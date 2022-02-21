@@ -7,6 +7,11 @@ export const KEY_CODES = {
     Enter: 'Enter',
 };
 
+/**
+ * Adds the keydown event to an element to check which key codes are pressed.
+ * @param {React.MutableRefObject<any>} target
+ * @param {Record<string, (event: KeyboardEvent) => any>} listeners
+ */
 export const useKeycodes = (
     target: React.MutableRefObject<any>,
     listeners: Record<string, (event: KeyboardEvent) => any>,

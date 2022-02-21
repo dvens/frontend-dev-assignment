@@ -18,6 +18,7 @@ export interface InputProps {
     ariaControls?: string;
     ariaLabelledby?: string;
     ref?: React.MutableRefObject<any>;
+    value?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -36,6 +37,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ariaControls,
             ariaLabelledby,
             autoComplete,
+            value,
         },
         ref,
     ) => (
@@ -60,6 +62,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 onFocus={onFocus}
                 onChange={onChange}
                 aria-autocomplete={ariaAutocomplete}
+                value={value}
                 aria-controls={ariaControls}
                 aria-labelledby={ariaLabelledby}
                 autoComplete={autoComplete}

@@ -1,4 +1,5 @@
 import { FormEvent, useRef, useState } from 'react';
+import { getSuggestions } from '../../../services/suggestions';
 import { debounce } from '../../../utils/debounce';
 import { KEY_CODES, useKeycodes } from '../../../utils/hooks';
 import { Button } from '../../shared/Button';
@@ -15,27 +16,31 @@ export const Search = () => {
 
     const inputRef = useRef(null);
 
-    useKeycodes(inputRef, {
-        [KEY_CODES.Escape]: () => console.log('Escape'),
-        [KEY_CODES.ArrowDown]: () => console.log('ArrowDown'),
-        [KEY_CODES.ArrowUp]: () => console.log('ArrowUp'),
-    });
-
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
         console.log('Form submitted');
     }
 
-    const inputOnchangeHandler = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputOnchangeHandler = debounce(async (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         const hasValue = !!value.trim().length;
 
+        const data = await getSuggestions(value);
+
+        console.log(data);
         setShowReset(hasValue);
     }, 250);
 
+    // TODO: This will go through the useSearch hook
     function resetOnClickHandler() {
         setShowReset(false);
     }
+
+    useKeycodes(inputRef, {
+        [KEY_CODES.Escape]: () => console.log('Escape'),
+        [KEY_CODES.ArrowDown]: () => console.log('ArrowDown'),
+        [KEY_CODES.ArrowUp]: () => console.log('ArrowUp'),
+    });
 
     return (
         <div className={styles.Search}>
