@@ -5,23 +5,17 @@ import style from './Button.module.css';
 
 interface ButtonProps {
     type?: 'button' | 'submit' | 'reset';
-    isHidden?: boolean;
-    onClick?: React.MouseEventHandler<HTMLButtonElement>;
     testId?: string;
+    extraClasses?: string;
 }
 
 export const Button: FunctionComponent<ButtonProps> = ({
     children,
     type = 'button',
-    isHidden = false,
-    onClick,
     testId,
+    extraClasses,
 }) => (
-    <button
-        type={type}
-        className={classNames(style.Button, { [style.ButtonIsHidden]: isHidden })}
-        onClick={onClick}
-        data-testid={testId}>
+    <button type={type} className={classNames(style.Button, extraClasses)} data-testid={testId}>
         {children}
     </button>
 );

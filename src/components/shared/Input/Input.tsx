@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { classNames } from '../../../utils/classNames';
 import { VisuallyHidden } from '../VisuallyHidden';
 
 import styles from './Input.module.css';
@@ -19,6 +20,7 @@ export interface InputProps {
     ariaLabelledby?: string;
     ref?: React.MutableRefObject<any>;
     value?: string;
+    extraClasses?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -38,6 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ariaLabelledby,
             autoComplete,
             value,
+            extraClasses,
         },
         ref,
     ) => (
@@ -54,7 +57,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 </label>
             )}
             <input
-                className={styles.Input}
+                className={classNames(styles.Input, extraClasses)}
                 id={id}
                 type={type}
                 placeholder={placeholder}

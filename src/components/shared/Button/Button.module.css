@@ -2,12 +2,7 @@
     background-color: transparent;
     border: none;
     outline: none;
-    opacity: 1;
     padding: 1rem;
-    transition-property: background-color, transform, opacity, visibility;
-    transition-duration: 250ms;
-    transform: scale(1);
-    visibility: visible;
 }
 
 .Button:hover {
@@ -17,10 +12,4 @@
 .Button:focus,
 .Button:hover {
     background-color: var(--color-light-grey);
-}
-
-.ButtonIsHidden {
-    opacity: 0;
-    transform: scale(0);
-    visibility: hidden;
 }

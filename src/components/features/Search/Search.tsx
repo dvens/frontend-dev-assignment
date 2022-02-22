@@ -1,76 +1,96 @@
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useRef } from 'react';
 import { getSuggestions } from '../../../services/suggestions';
 import { debounce } from '../../../utils/debounce';
-import { KEY_CODES, useKeycodes } from '../../../utils/hooks';
+import { KEY_CODES, useClickOutside, useKeycodes } from '../../../utils/hooks';
 import { Button } from '../../shared/Button';
+import { ComboboxList, ComboboxListItem } from '../../shared/Combobox';
+import { HighlightWords } from '../../shared/HighlightWords';
 import { CloseIcon, SearchIcon } from '../../shared/Icons';
 import { Input } from '../../shared/Input';
 import { VisuallyHidden } from '../../shared/VisuallyHidden';
+import { useSearch } from './hooks/useSearch';
 import styles from './Search.module.css';
 
 const SEARCH_LABEL = 'search-label';
 const SEARCH_LISTBOX = 'search-listbox';
 
 export const Search = () => {
-    const [showReset, setShowReset] = useState(false);
-
+    const {
+        state,
+        setSearchItems,
+        resetSearch,
+        setSearchValue,
+        setSearchExpanded,
+        setActiveSearchItem,
+        setActiveSearchIndex,
+    } = useSearch();
+    const hasItems = state.items.length > 0;
     const inputRef = useRef(null);
+    const searchRef = useRef(null);
 
-    function handleSubmit(e: FormEvent) {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        console.log('Form submitted');
-    }
+    };
 
-    const inputOnchangeHandler = debounce(async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        const hasValue = !!value.trim().length;
-
+    const inputOnChangeDebounce = debounce(async (value: string) => {
         const data = await getSuggestions(value);
+        setSearchItems(data);
+    }, 300);
 
-        console.log(data);
-        setShowReset(hasValue);
-    }, 250);
+    const inputOnchangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        const hasMinCharacters = value.trim().length > 2;
 
-    // TODO: This will go through the useSearch hook
-    function resetOnClickHandler() {
-        setShowReset(false);
-    }
+        if (hasMinCharacters) {
+            setSearchValue(value);
+            inputOnChangeDebounce(value);
+        } else {
+            resetSearch(value);
+        }
+    };
 
     useKeycodes(inputRef, {
-        [KEY_CODES.Escape]: () => console.log('Escape'),
-        [KEY_CODES.ArrowDown]: () => console.log('ArrowDown'),
-        [KEY_CODES.ArrowUp]: () => console.log('ArrowUp'),
+        [KEY_CODES.Escape]: () => resetSearch(),
+        [KEY_CODES.ArrowDown]: () => setActiveSearchIndex('DOWN'),
+        [KEY_CODES.ArrowUp]: () => setActiveSearchIndex('UP'),
+        [KEY_CODES.Enter]: () => {
+            const activeItem = state.items[state.selectedIndex];
+
+            if (activeItem) {
+                setActiveSearchItem(activeItem.searchterm);
+            }
+        },
     });
 
+    useClickOutside(searchRef, () => setSearchExpanded(false));
+
     return (
-        <div className={styles.Search}>
-            <form role="search" onSubmit={handleSubmit}>
+        <div className={styles.Search} ref={searchRef}>
+            <form role="search" onSubmit={handleSubmit} onReset={() => resetSearch()}>
                 <div
                     role="combobox"
-                    aria-expanded="false"
+                    aria-expanded={state.isExpanded}
                     aria-haspopup="listbox"
                     aria-owns={SEARCH_LISTBOX}>
                     <Input
                         label="Search for products and pick an option"
                         placeholder="Zoeken"
                         id="search-input"
+                        extraClasses={styles.SearchInput}
                         labelId={SEARCH_LABEL}
-                        onFocus={(e) => console.log('Focus: ', e)}
+                        onFocus={() => setSearchExpanded(hasItems)}
                         onChange={inputOnchangeHandler}
-                        onBlur={(e) => console.log('Blur: ', e)}
+                        onBlur={() => setSearchExpanded(false)}
                         ariaAutocomplete="list"
                         ariaControls={SEARCH_LISTBOX}
                         ariaLabelledby={SEARCH_LABEL}
                         srOnly={true}
                         autoComplete="off"
                         ref={inputRef}
+                        value={state.searchValue}
                     />
                     <div className={styles.SearchButtonHolder}>
-                        <Button
-                            type="reset"
-                            testId="reset"
-                            isHidden={!showReset}
-                            onClick={resetOnClickHandler}>
+                        <Button type="reset" testId="reset" extraClasses={styles.SearchReset}>
                             <VisuallyHidden>Reset search results</VisuallyHidden>
                             <CloseIcon width={12} height={12} />
                         </Button>
@@ -80,7 +100,25 @@ export const Search = () => {
                         </Button>
                     </div>
                 </div>
-                <ul role="listbox" aria-labelledby={SEARCH_LABEL} id={SEARCH_LISTBOX}></ul>
+                <div className={styles.SearchComboboxWrapper}>
+                    <ComboboxList
+                        ariaLabelledby={SEARCH_LABEL}
+                        id={SEARCH_LISTBOX}
+                        isActive={state.isExpanded}>
+                        {state.items.map((item, key) => (
+                            <ComboboxListItem
+                                testId={item.searchterm}
+                                key={item.searchterm}
+                                selected={state.selectedIndex === key}
+                                onClickHandler={() => setActiveSearchItem(item.searchterm)}>
+                                <HighlightWords
+                                    text={`${item.searchterm} (${item.nrResults})`}
+                                    searchValue={state.searchValue}
+                                />
+                            </ComboboxListItem>
+                        ))}
+                    </ComboboxList>
+                </div>
             </form>
         </div>
     );

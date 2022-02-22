@@ -21,12 +21,12 @@ export const useKeycodes = (
 
         if (!targetEl) return;
 
-        function onKeyDown(e: KeyboardEvent) {
+        const onKeyDown = (e: KeyboardEvent) => {
             const listener = listeners[e.code];
             listener && listener(e);
-        }
+        };
 
         targetEl.addEventListener('keydown', onKeyDown);
         return () => targetEl.removeEventListener('keydown', onKeyDown);
-    }, []);
+    }, [target, listeners]);
 };

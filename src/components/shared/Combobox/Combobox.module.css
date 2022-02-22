@@ -1,6 +1,7 @@
 .ComboboxList {
     border-left: 0.1rem solid var(--color-light-grey);
     border-right: 0.1rem solid var(--color-light-grey);
+    height: 100%;
     list-style: none;
     max-height: 20rem;
     opacity: 0;
@@ -10,6 +11,7 @@
     transition-duration: 300ms;
     transform: translateY(2rem);
     visibility: hidden;
+    width: 100%;
 }
 
 .ComboboxListisActive {

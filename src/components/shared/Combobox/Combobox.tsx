@@ -11,7 +11,8 @@ interface ComboboxListProps {
 
 interface ComboboxListItemProps {
     selected?: boolean;
-    id: string;
+    testId: string;
+    onClickHandler: React.MouseEventHandler<HTMLLIElement>;
 }
 
 export const ComboboxList: FunctionComponent<ComboboxListProps> = ({
@@ -30,10 +31,16 @@ export const ComboboxList: FunctionComponent<ComboboxListProps> = ({
 );
 export const ComboboxListItem: FunctionComponent<ComboboxListItemProps> = ({
     selected = false,
-    id,
+    testId,
     children,
+    onClickHandler,
 }) => (
-    <li className={styles.ComboboxListItem} role="option" aria-selected={selected} id={id}>
+    <li
+        className={styles.ComboboxListItem}
+        role="option"
+        aria-selected={selected}
+        data-testid={testId}
+        onClick={onClickHandler}>
         {children}
     </li>
 );

@@ -2,10 +2,29 @@
     position: relative;
 }
 
+.SearchInput:placeholder-shown + .SearchButtonHolder > .SearchReset {
+    opacity: 0;
+    transform: scale(0);
+    visibility: hidden;
+}
+
+.SearchReset {
+    opacity: 1;
+    transition-property: background-color, transform, opacity, visibility;
+    transition-duration: 250ms;
+    transform: scale(1);
+    visibility: visible;
+}
+
 .SearchButtonHolder {
     display: flex;
     position: absolute;
-    right: 0;
+    right: 0.1rem;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.SearchComboboxWrapper {
+    position: absolute;
+    width: 100%;
 }
