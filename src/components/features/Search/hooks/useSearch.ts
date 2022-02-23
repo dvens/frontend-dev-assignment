@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 import { Suggestions } from '../../../../services/suggestions';
 
+// Create re-usable constants for types and switch values instead of using an const.
 enum Actions {
     SET_SEARCH_ITEMS = 'SET_SEARCH_ITEMS',
     RESET_SEARCH = 'RESET_SEARCH',

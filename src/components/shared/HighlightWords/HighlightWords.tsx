@@ -12,7 +12,13 @@ export const HighlightWords = ({
     const regex = new RegExp(`(${searchValue})`, 'gi');
     const highlightedParts = text.split(regex);
     const finalText = highlightedParts.map((text, index) =>
-        regex.test(text) ? <mark key={index}>{text}</mark> : text,
+        regex.test(text) ? (
+            <mark data-testid="highlighted" key={index}>
+                {text}
+            </mark>
+        ) : (
+            text
+        ),
     );
 
     return <span>{finalText}</span>;

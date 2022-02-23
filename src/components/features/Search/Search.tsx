@@ -1,4 +1,4 @@
-import { FormEvent, useRef } from 'react';
+import React, { FormEvent, useRef } from 'react';
 import { getSuggestions } from '../../../services/suggestions';
 import { debounce } from '../../../utils/debounce';
 import { KEY_CODES, useClickOutside, useKeycodes } from '../../../utils/hooks';
@@ -28,8 +28,9 @@ export const Search = () => {
     const inputRef = useRef(null);
     const searchRef = useRef(null);
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log('Do something here with the submit');
     };
 
     const inputOnChangeDebounce = debounce(async (value: string) => {

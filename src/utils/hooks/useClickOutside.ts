@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 const MOUSEDOWN = 'mousedown';
 const TOUCHSTART = 'touchstart';
@@ -11,7 +11,7 @@ export const useClickOutside = (ref: React.MutableRefObject<any>, callback: () =
             callback();
         }
     };
-    React.useEffect(() => {
+    useEffect(() => {
         events.forEach((event) => {
             document.addEventListener(event, handleClick);
         });

@@ -1,5 +1,7 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Input, InputProps } from '.';
+
+import userEvent from '@testing-library/user-event';
 
 import styles from '../VisuallyHidden/VisuallyHidden.module.css';
 
@@ -17,7 +19,10 @@ describe('<Input />', () => {
         render(<Input {...DEFAULT_INPUT_PROPS} onBlur={handleOnBlurEvent} />);
 
         const input = screen.getByPlaceholderText(DEFAULT_INPUT_PROPS.placeholder);
-        fireEvent.blur(input);
+
+        userEvent.type(input, 'Truien');
+        userEvent.click(document.body);
+
         expect(handleOnBlurEvent).toBeCalled();
     });
 
@@ -28,7 +33,7 @@ describe('<Input />', () => {
 
         const input = screen.getByPlaceholderText(DEFAULT_INPUT_PROPS.placeholder);
 
-        fireEvent.change(input, { target: { value: 'Test value' } });
+        userEvent.type(input, 'Test value');
 
         expect(handleOnchangeEvent).toBeCalled();
     });
@@ -40,7 +45,7 @@ describe('<Input />', () => {
 
         const input = screen.getByPlaceholderText(DEFAULT_INPUT_PROPS.placeholder);
 
-        fireEvent.focus(input);
+        userEvent.click(input);
 
         expect(handleOnFocus).toBeCalled();
     });

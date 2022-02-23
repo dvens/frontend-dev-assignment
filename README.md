@@ -1,4 +1,35 @@
 <!-- omit in toc -->
+## Introduction
+This is a project that shows an accessible Search according to the new Aria 1.1.
+
+Tech:
+* Used React Hooks with typescript
+* CSS Modules for styling
+* State management is done by useReducer
+* Storybook to show individual components
+
+Folder arquitecture:
+* src folder with:
+    * Components folder (shared, templates and features)
+    * Services folder for the API endpoints
+    * Utils folder with general utilities used through out the App
+
+Improvements:
+Added Typescript and Prettier config (make sure to have Prettier Code formatter vscode plugin installed).
+
+## How to use it?
+Install it and run (Node 12.18 is used and Yarn 1.22.10):
+
+```bash
+yarn
+yarn start
+```
+
+For storybook run:
+```bash
+yarn api
+yarn storybook
+```
 
 ## de Bijenkorf Frontend Dev assignment
 
@@ -101,18 +132,3 @@ If you have any remarks or observations while working on this assignment you are
 ## Submitting your code
 
 When you complete the assignment either push your local working copy to a remote repository or email us a .zip file with your solution. **Please do not fork this repository**.
-
-## TODO
-
--   Use a hook as useEvent or useKey to register key movement
--   Create hook useCombobox
-x   Create feature called search
--   Create shared components Combobox, ComboList, ComboListItem
-x   Create shared component Input
-x   Create hook for useClickoutside
--   Create shared highlight component
-x Add typescript
-x  Add storybook
--   Use reducer instead of usestate.
--   Add use keyboard focus hook for only focus state on the keyboard.
-x   Add skiplink for content
